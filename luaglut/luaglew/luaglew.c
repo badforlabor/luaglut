@@ -6948,7 +6948,7 @@ static void *luaglew_checkarray_void(lua_State *L, int index)
 // 1D CHAR = 1 STRING
 static char *luaglew_checkarray_char(lua_State *L, int index)
 {
-	char str[300];
+	char str[64 * 1024];
 	char *pole;
 
 	strcpy(str, luaL_checkstring(L, index));
@@ -10799,16 +10799,17 @@ LUA_API int luaglew_glGetProgramEnvParameterdvARB(lua_State *L) {
 }
 // void glGetProgramEnvParameterfvARB (GLenum target, GLuint index, GLfloat *params)
 LUA_API int luaglew_glGetProgramEnvParameterfvARB(lua_State *L) {
-	GLfloat return_value[16];
+	GLfloat return_value[512];
 	glGetProgramEnvParameterfvARB(luaL_checkint(L, 1), (GLuint)luaL_checkint(L, 2), return_value);
 	luaglew_pusharray_float(L, return_value, 16);
 	return 1;
 }
 // void glGetProgramInfoLog (GLuint program, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
 LUA_API int luaglew_glGetProgramInfoLog(lua_State *L) {
-	GLchar return_value[16];
-	glGetProgramInfoLog((GLuint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLsizei *)luaglew_checkarray_int(L, 3), return_value);
-	lua_pushlstring(L, return_value, 1);
+	GLchar return_value[512];
+	GLsizei char_size = 0;
+	glGetProgramInfoLog((GLuint)luaL_checkint(L, 1), 512, &char_size, return_value);
+	lua_pushlstring(L, return_value, char_size);
 	return 1;
 }
 // void glGetProgramLocalParameterdvARB (GLenum target, GLuint index, GLdouble *params)
@@ -10911,9 +10912,10 @@ LUA_API int luaglew_glGetSeparableFilter(lua_State *L) {
 }
 // void glGetShaderInfoLog (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog)
 LUA_API int luaglew_glGetShaderInfoLog(lua_State *L) {
-	GLchar return_value[16];
-	glGetShaderInfoLog((GLuint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLsizei *)luaglew_checkarray_int(L, 3), return_value);
-	lua_pushlstring(L, return_value, 1);
+	GLchar return_value[512];
+	GLsizei char_size = 0;
+	glGetShaderInfoLog((GLuint)luaL_checkint(L, 1), 512, &char_size, return_value);
+	lua_pushlstring(L, return_value, char_size);
 	return 1;
 }
 // void glGetShaderSource (GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *source)
@@ -12191,7 +12193,12 @@ LUA_API int luaglew_glShadeModel(lua_State *L) {
 }
 // void glShaderSource (GLuint shader, GLsizei count, const GLchar* *string, const GLint *length)
 LUA_API int luaglew_glShaderSource(lua_State *L) {
-	glShaderSource((GLuint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLchar *)luaglew_checkarray_char(L, 3), (GLint *)luaglew_checkarray_int(L, 4));
+	GLint* p4 = (GLint *)luaglew_checkarray_int(L, 4);
+	GLchar *p3 = (GLchar *)luaglew_checkarray_char(L, 3);
+	GLsizei p2 = (GLsizei)luaL_checklong(L, 2);
+	GLuint p1 = (GLuint)luaL_checkint(L, 1);
+	//MessageBoxA(NULL, p3, p3, MB_OK);
+	glShaderSource(p1, p2, &p3, NULL);
 	return 0;
 }
 // void glShaderSourceARB (GLhandleARB shaderObj, GLsizei count, const GLcharARB **string, const GLint *length)
