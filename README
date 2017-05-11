@@ -4,11 +4,13 @@
 坑爹，默认的版本下载之后，找了半天没找到了对应的freeglut，没办法，最后自己编译了一份可以执行的
 release版本可以编译通过
 偷懒了，引用的路径全部是绝对路径，需要自己编译的，手动改一下吧。
+支持glew
 ### 环境
 vs2013
 cmake
-lua源码(5.1)
-freeglut源码
+lua源码(5.1)  https://github.com/badforlabor/lua
+freeglut源码 https://github.com/badforlabor/freeglut
+glew源代码 https://github.com/badforlabor/glew
 ### 可执行路径
 example目录可以自行测试
 

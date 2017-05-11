@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaglut", "luaglut\luaglut.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "memarray", "memarray\memarray.vcxproj", "{73E1A37E-01BF-4D9B-B890-73EC076CC8C5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaglew", "luaglew\luaglew.vcxproj", "{7E34B470-6498-4378-835F-1C7C401C7352}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{73E1A37E-01BF-4D9B-B890-73EC076CC8C5}.Debug|Win32.Build.0 = Debug|Win32
 		{73E1A37E-01BF-4D9B-B890-73EC076CC8C5}.Release|Win32.ActiveCfg = Release|Win32
 		{73E1A37E-01BF-4D9B-B890-73EC076CC8C5}.Release|Win32.Build.0 = Release|Win32
+		{7E34B470-6498-4378-835F-1C7C401C7352}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7E34B470-6498-4378-835F-1C7C401C7352}.Debug|Win32.Build.0 = Debug|Win32
+		{7E34B470-6498-4378-835F-1C7C401C7352}.Release|Win32.ActiveCfg = Release|Win32
+		{7E34B470-6498-4378-835F-1C7C401C7352}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
