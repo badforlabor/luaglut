@@ -20,6 +20,12 @@
 //---------------------------------- GLEW CONSTANTS BINDING-------------------------------------//
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+const void * check_lightuserdata(lua_State *L, int n)
+{
+	if (lua_type(L, n) != LUA_TLIGHTUSERDATA)
+		luaL_typerror(L, n, "lightuserdata");
+	return (const void *)lua_touserdata(L, n);
+}
 
 //////////////////////////////////////////////////////////////////////////
 //------------------------ CONSTANT STRUCTURE --------------------------//
@@ -6918,6 +6924,10 @@ static void *luaglew_checkarray_void(lua_State *L, int index)
 	luaL_checktype(L, index, LUA_TTABLE);
 	n1 = luaL_getn(L, index);
 
+	// 兼容很多函数要求传入的void*参数为NULL的情况
+	if (n1 == 0)
+		return NULL;
+
 	char **pole = (char **)malloc(n1 * sizeof(char *));
 
 	for (i = 0; i < n1; i++) {
@@ -6997,6 +7007,15 @@ LUA_API int *luaglew_checkarray_enum(lua_State *L, int index)
 	return pole;
 }
 
+static int luaglew_checkarray_cnt(lua_State *L, int index)
+{
+	int n;
+
+	luaL_checktype(L, index, LUA_TTABLE);
+	n = luaL_getn(L, index);
+
+	return n;
+}
 //1D FLOAT
 static float *luaglew_checkarray_float(lua_State *L, int index)
 {
@@ -9531,6 +9550,11 @@ LUA_API int luaglew_glBindTexture(lua_State *L) {
 	glBindTexture(luaL_checkint(L, 1), (GLuint)luaL_checkint(L, 2));
 	return 0;
 }
+// void glBindVertexArray (GLuint id)
+LUA_API int luaglew_glBindVertexArray(lua_State *L) {
+	glBindVertexArray((GLuint)luaL_checkint(L, 1));
+	return 0;
+}
 // void glBindVertexArrayAPPLE (GLuint id)
 LUA_API int luaglew_glBindVertexArrayAPPLE(lua_State *L) {
 	glBindVertexArrayAPPLE((GLuint)luaL_checkint(L, 1));
@@ -9587,8 +9611,59 @@ LUA_API int luaglew_glBlitFramebufferEXT(lua_State *L) {
 	return 0;
 }
 // void glBufferData (GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage)
+LUA_API int luaglew_glBufferFormatedData(lua_State *L) {
+	
+	GLenum p4 = luaL_checkint(L, 4);
+	GLenum bufferType = luaL_checkint(L, 2);
+	GLvoid* p3 = NULL;
+	GLsizeiptr p2 = 0;
+	GLenum p1 = luaL_checkint(L, 1);
+
+	switch (bufferType)
+	{
+	case GL_FLOAT:
+		p2 = (GLsizeiptr)(luaglew_checkarray_cnt(L, 3) * sizeof(float));
+		p3 = (GLvoid *)luaglew_checkarray_float(L, 3);
+		break;
+	case GL_INT:
+		p2 = (GLsizeiptr)(luaglew_checkarray_cnt(L, 3) * sizeof(int));
+		p3 = (GLvoid *)luaglew_checkarray_int(L, 3);
+		break;
+	default:
+		luaL_error(L, "invalid data type, please use GL_FLOAT or GL_INT");
+		break;
+	}
+
+	glBufferData(p1, p2, p3, p4);
+	return 0;
+}
 LUA_API int luaglew_glBufferData(lua_State *L) {
-	glBufferData(luaL_checkint(L, 1), (GLsizeiptr)luaglew_checkarray_long(L, 2), (GLvoid *)luaglew_checkarray_void(L, 3), luaL_checkint(L, 4));
+
+	// 请使用 glBufferTypeData 接口
+	// todo 抛出异常
+	luaL_error(L, "glBufferData is invalid. please use glBufferTypeData");
+
+	return 0;
+}
+LUA_API int luaglew_glVertexAttribPointer(lua_State *L) {
+
+	GLuint index = 0;
+	GLint size = 0;
+	GLenum type = 0;
+	GLboolean normalized = 0;
+	GLsizei stride = 0;
+	GLvoid* pointer = 0;
+
+	// 简化函数：pointer固定为0
+	pointer = (GLvoid*)luaL_checkint(L, 6);
+	stride = luaL_checkint(L, 5);
+	normalized = luaL_checkint(L, 4);
+	type = luaL_checkint(L, 3);
+	size = luaL_checkint(L, 2);
+	index = luaL_checkint(L, 1);
+
+	glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+
 	return 0;
 }
 // void glBufferDataARB (GLenum target, GLsizeiptrARB size, const GLvoid *data, GLenum usage)
@@ -10073,7 +10148,7 @@ LUA_API int luaglew_glDrawElementArrayAPPLE(lua_State *L) {
 }
 // void glDrawElements (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices)
 LUA_API int luaglew_glDrawElements(lua_State *L) {
-	glDrawElements(luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), luaL_checkint(L, 3), (GLvoid *)luaglew_checkarray_void(L, 4));
+	glDrawElements(luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), luaL_checkint(L, 3), (GLvoid *)luaglew_checkarray_void(L, 4));	
 	return 0;
 }
 // void glDrawElementsInstancedARB (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount)
@@ -10476,6 +10551,15 @@ LUA_API int luaglew_glGenVertexArraysAPPLE(lua_State *L) {
 	GLsizei n = (GLsizei)luaL_checklong(L, 1);
 	return_value = (GLuint *)malloc(n*sizeof(GLuint));
 	glGenVertexArraysAPPLE(n, return_value);
+	luaglew_pusharray_uint(L, return_value, n);
+	return 1;
+}
+LUA_API int luaglew_glGenVertexArrays(lua_State *L)
+{
+	GLuint * return_value;
+	GLsizei n = (GLsizei)luaL_checklong(L, 1);
+	return_value = (GLuint *)malloc(n*sizeof(GLuint));
+	glGenVertexArrays(n, return_value);
 	luaglew_pusharray_uint(L, return_value, n);
 	return 1;
 }
@@ -12458,7 +12542,8 @@ LUA_API int luaglew_glTexImage1D(lua_State *L) {
 }
 // void glTexImage2D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 LUA_API int luaglew_glTexImage2D(lua_State *L) {
-	glTexImage2D(luaL_checkint(L, 1), (GLint)luaL_checkint(L, 2), luaL_checkint(L, 3), (GLsizei)luaL_checklong(L, 4), (GLsizei)luaL_checklong(L, 5), (GLint)luaL_checkint(L, 6), luaL_checkint(L, 7), luaL_checkint(L, 8), (GLvoid *)luaglew_checkarray_void(L, 9));
+	//glTexImage2D(luaL_checkint(L, 1), (GLint)luaL_checkint(L, 2), luaL_checkint(L, 3), (GLsizei)luaL_checklong(L, 4), (GLsizei)luaL_checklong(L, 5), (GLint)luaL_checkint(L, 6), luaL_checkint(L, 7), luaL_checkint(L, 8), (GLvoid *)luaglew_checkarray_void(L, 9));
+	glTexImage2D(luaL_checkint(L, 1), (GLint)luaL_checkint(L, 2), luaL_checkint(L, 3), (GLsizei)luaL_checklong(L, 4), (GLsizei)luaL_checklong(L, 5), (GLint)luaL_checkint(L, 6), luaL_checkint(L, 7), luaL_checkint(L, 8), (GLvoid *)check_lightuserdata(L, 9));
 	return 0;
 }
 // void glTexImage3D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
@@ -13439,6 +13524,7 @@ static const struct luaL_Reg luaglew_lib[] = {
 	{ "glBindRenderbuffer", luaglew_glBindRenderbuffer },
 	{ "glBindRenderbufferEXT", luaglew_glBindRenderbufferEXT },
 	{ "glBindTexture", luaglew_glBindTexture },
+	{ "glBindVertexArray", luaglew_glBindVertexArray },
 	{ "glBindVertexArrayAPPLE", luaglew_glBindVertexArrayAPPLE },
 	{ "glBitmap", luaglew_glBitmap },
 	{ "glBlendColorEXT", luaglew_glBlendColorEXT },
@@ -13450,7 +13536,9 @@ static const struct luaL_Reg luaglew_lib[] = {
 	{ "glBlendFuncSeparateEXT", luaglew_glBlendFuncSeparateEXT },
 	{ "glBlitFramebuffer", luaglew_glBlitFramebuffer },
 	{ "glBlitFramebufferEXT", luaglew_glBlitFramebufferEXT },
-	{ "glBufferData", luaglew_glBufferData },
+	{ "glBufferData", luaglew_glBufferData }, 
+	{ "glBufferFormatedData", luaglew_glBufferFormatedData },
+	{ "glVertexAttribPointer", luaglew_glVertexAttribPointer },
 	{ "glBufferDataARB", luaglew_glBufferDataARB },
 	{ "glBufferParameteriAPPLE", luaglew_glBufferParameteriAPPLE },
 	{ "glBufferSubData", luaglew_glBufferSubData },
@@ -13619,6 +13707,7 @@ static const struct luaL_Reg luaglew_lib[] = {
 	{ "glGenRenderbuffersEXT", luaglew_glGenRenderbuffersEXT },
 	{ "glGenTextures", luaglew_glGenTextures },
 	{ "glGenVertexArraysAPPLE", luaglew_glGenVertexArraysAPPLE },
+	{ "glGenVertexArrays", luaglew_glGenVertexArrays },
 	{ "glGenerateMipmap", luaglew_glGenerateMipmap },
 	{ "glGenerateMipmapEXT", luaglew_glGenerateMipmapEXT },
 	{ "glGetActiveAttrib", luaglew_glGetActiveAttrib },
