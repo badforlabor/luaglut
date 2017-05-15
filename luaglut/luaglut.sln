@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaglew", "luaglew\luaglew.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luastb", "luastb\luastb.vcxproj", "{76B2AE8D-FD00-469B-882D-0C49EB7F8EB2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luaglm", "luaglm\luaglm.vcxproj", "{A27359BD-06F0-4F73-B8CE-66071A95A8F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{76B2AE8D-FD00-469B-882D-0C49EB7F8EB2}.Debug|Win32.Build.0 = Debug|Win32
 		{76B2AE8D-FD00-469B-882D-0C49EB7F8EB2}.Release|Win32.ActiveCfg = Release|Win32
 		{76B2AE8D-FD00-469B-882D-0C49EB7F8EB2}.Release|Win32.Build.0 = Release|Win32
+		{A27359BD-06F0-4F73-B8CE-66071A95A8F6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A27359BD-06F0-4F73-B8CE-66071A95A8F6}.Debug|Win32.Build.0 = Debug|Win32
+		{A27359BD-06F0-4F73-B8CE-66071A95A8F6}.Release|Win32.ActiveCfg = Release|Win32
+		{A27359BD-06F0-4F73-B8CE-66071A95A8F6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{460CD492-C765-49DB-8D75-847282C8A82F}</ProjectGuid>
+    <ProjectGuid>{A27359BD-06F0-4F73-B8CE-66071A95A8F6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>luaglut</RootNamespace>
+    <RootNamespace>luaglm</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -51,14 +51,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LUAGLUT_EXPORTS;USE_FREEGLUT;inline=__inline;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\liubo\github\FreeGLUT-git_master\freeglut\freeglut\include;E:\liubo\github\lua\src;$(SolutionDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LUAGLM_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\liubo\github\FreeGLUT-git_master\freeglut\freeglut\bin\lib\Debug;$(SolutionDir)lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,23 +66,29 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LUAGLUT_EXPORTS;inline=__inline;USE_FREEGLUT;LUA_BUILD_AS_DLL;LUA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>E:\liubo\github\FreeGLUT-git_master\freeglut\freeglut\include;E:\liubo\github\lua\src;$(SolutionDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LUAGLM_EXPORTS;LUA_BUILD_AS_DLL;LUA_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>E:\liubo\github\lua\src;$(SolutionDir)include;F:\github3\toluapp-master\include;F:\github3\glm-master</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\liubo\github\FreeGLUT-git_master\freeglut\freeglut\bin\lib\Release;$(SolutionDir)lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib;F:\github3\toluapp-master\bin\Release;F:\github3\glm-master\bin\glm\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;lua.lib;toluapp.lib;glm_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /y $(SolutionDir)Release\luaglm.dll F:\github3\ZeroBraneStudio-master\example</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\luaglut.c" />
+    <ClInclude Include="tclass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="glm.cpp" />
+    <ClCompile Include="maindll.c" />
+    <ClCompile Include="tclass.cpp" />
+    <ClCompile Include="vec3.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
