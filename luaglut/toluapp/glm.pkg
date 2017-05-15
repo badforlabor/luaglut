@@ -1,0 +1,8 @@
+$#include <glm/glm.hpp>
+$#include <glm/gtc/matrix_transform.hpp>
+
+namespace glm
+{
+	float radians(float a);
+	glm::vec3 radians(glm::vec3 a);
+}

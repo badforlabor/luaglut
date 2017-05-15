@@ -1,0 +1,18 @@
+$#include <glm/glm.hpp>
+$#include <glm/gtc/matrix_transform.hpp>
+
+namespace glm
+{
+class vec3 
+{
+public:
+	float x;
+	float y;
+	float z;
+    vec3(); 
+    vec3(vec3 a);
+    vec3(float xf, float yf, float zf);
+	float length();
+	vec3 operator+(vec3 v);
+};
+}

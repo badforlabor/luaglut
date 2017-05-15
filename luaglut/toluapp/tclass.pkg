@@ -1,0 +1,23 @@
+$#include "tclass.h"
+namespace glm{
+class CNumber {
+public:
+    CNumber(); 
+    CNumber(int num);
+    ~CNumber();   
+    void SetNumber(int num);    
+    int GetNumber();    
+    int Add(int num);
+};
+
+class CMessage
+{
+public:
+    CMessage();
+    ~CMessage();
+    void SetMessage(char *msg);
+    char *GetMessage();
+    void ShowMessage();
+
+};
+}
