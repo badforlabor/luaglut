@@ -1,6 +1,6 @@
 /*
 ** Lua binding: glm
-** Generated automatically by tolua++-1.0.92 on 05/15/17 18:47:11.
+** Generated automatically by tolua++-1.0.92 on 05/18/17 15:42:17.
 */
 
 #ifndef __cplusplus
@@ -13,7 +13,7 @@
 /* Exported function */
 extern "C"
 {
-	TOLUA_API int  tolua_glm_open(lua_State* tolua_S);
+	TOLUA_API int  tolua_glm_open (lua_State* tolua_S);
 }
 
 #include <glm/glm.hpp>
@@ -100,6 +100,78 @@ tolua_lerror:
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* function: glm::dot */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_dot00
+static int tolua_glm_glm_dot00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     (tolua_isvaluenil(tolua_S,1,&tolua_err) || !tolua_isusertype(tolua_S,1,"glm::vec3",0,&tolua_err)) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !tolua_isusertype(tolua_S,2,"glm::vec3",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::vec3 a = *((glm::vec3*)  tolua_tousertype(tolua_S,1,0));
+  glm::vec3 b = *((glm::vec3*)  tolua_tousertype(tolua_S,2,0));
+  {
+   float tolua_ret = (float)  glm::dot(a,b);
+   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'dot'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* function: glm::cross */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_cross00
+static int tolua_glm_glm_cross00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     (tolua_isvaluenil(tolua_S,1,&tolua_err) || !tolua_isusertype(tolua_S,1,"glm::vec3",0,&tolua_err)) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !tolua_isusertype(tolua_S,2,"glm::vec3",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::vec3 a = *((glm::vec3*)  tolua_tousertype(tolua_S,1,0));
+  glm::vec3 b = *((glm::vec3*)  tolua_tousertype(tolua_S,2,0));
+  {
+   glm::vec3 tolua_ret = (glm::vec3)  glm::cross(a,b);
+   {
+#ifdef __cplusplus
+    void* tolua_obj = Mtolua_new((glm::vec3)(tolua_ret));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::vec3");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#else
+    void* tolua_obj = tolua_copy(tolua_S,(void*)&tolua_ret,sizeof(glm::vec3));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::vec3");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#endif
+   }
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'cross'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_glm_open (lua_State* tolua_S)
 {
@@ -111,6 +183,8 @@ TOLUA_API int tolua_glm_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"glm");
    tolua_function(tolua_S,"radians",tolua_glm_glm_radians00);
    tolua_function(tolua_S,"radians",tolua_glm_glm_radians01);
+   tolua_function(tolua_S,"dot",tolua_glm_glm_dot00);
+   tolua_function(tolua_S,"cross",tolua_glm_glm_cross00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

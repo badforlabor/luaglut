@@ -17,7 +17,7 @@ LUALIB_API int luaopen_luaglm(lua_State *L)
 	tolua_tclass_open(L);
 	tolua_vec3_open(L);
 	tolua_glm_open(L);
-
+	
 	lua_newtable(L);
 	//luaL_register(L, NULL, luaglew_lib);
 	//luaglew_const_bind(L);
