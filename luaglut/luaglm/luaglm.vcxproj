@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="glm.cpp" />
     <ClCompile Include="maindll.c" />
+    <ClCompile Include="mat4.cpp" />
     <ClCompile Include="tclass.cpp" />
     <ClCompile Include="vec3.cpp" />
   </ItemGroup>
