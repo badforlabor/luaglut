@@ -1,6 +1,6 @@
 /*
 ** Lua binding: mat4
-** Generated automatically by tolua++-1.0.92 on 05/18/17 16:16:49.
+** Generated automatically by tolua++-1.0.92 on 05/18/17 16:32:06.
 */
 
 #ifndef __cplusplus
@@ -474,6 +474,42 @@ tolua_lerror:
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: get of class  glm::mat4 */
+#ifndef TOLUA_DISABLE_tolua_mat4_glm_mat4_get00
+static int tolua_mat4_glm_mat4_get00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"glm::mat4",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::mat4* self = (glm::mat4*)  tolua_tousertype(tolua_S,1,0);
+  float i = ((float)  tolua_tonumber(tolua_S,2,0));
+  float j = ((float)  tolua_tonumber(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'get'", NULL);
+#endif
+  {
+   float tolua_ret = (*self)[i][j];
+   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'get'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_mat4_open (lua_State* tolua_S)
 {
@@ -503,6 +539,7 @@ TOLUA_API int tolua_mat4_open (lua_State* tolua_S)
     tolua_function(tolua_S,".sub",tolua_mat4_glm_mat4__sub01);
     tolua_function(tolua_S,".mul",tolua_mat4_glm_mat4__mul01);
     tolua_function(tolua_S,".div",tolua_mat4_glm_mat4__div01);
+    tolua_function(tolua_S,"get",tolua_mat4_glm_mat4_get00);
    tolua_endmodule(tolua_S);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
