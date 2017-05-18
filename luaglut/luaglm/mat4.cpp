@@ -11,7 +11,10 @@
 #include "tolua++.h"
 
 /* Exported function */
-TOLUA_API int  tolua_mat4_open (lua_State* tolua_S);
+extern "C"
+{
+	TOLUA_API int  tolua_mat4_open (lua_State* tolua_S);
+}
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
