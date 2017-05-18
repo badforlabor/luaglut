@@ -1,4 +1,4 @@
+set classfile=glm
 
-
-toluapp.exe glm.pkg > glm.cpp
-copy /y glm.cpp ..\luaglm\
+toluapp.exe %classfile%.pkg > %classfile%.cpp
+copy /y %classfile%.cpp ..\luaglm\

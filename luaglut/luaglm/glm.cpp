@@ -1,6 +1,6 @@
 /*
 ** Lua binding: glm
-** Generated automatically by tolua++-1.0.92 on 05/18/17 16:35:37.
+** Generated automatically by tolua++-1.0.92 on 05/18/17 17:38:02.
 */
 
 #ifndef __cplusplus
@@ -531,6 +531,84 @@ static int tolua_glm_glm_lookAt00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* function: glm::transpose */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_transpose00
+static int tolua_glm_glm_transpose00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     (tolua_isvaluenil(tolua_S,1,&tolua_err) || !tolua_isusertype(tolua_S,1,"glm::mat4",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::mat4 m = *((glm::mat4*)  tolua_tousertype(tolua_S,1,0));
+  {
+   glm::mat4 tolua_ret = (glm::mat4)  glm::transpose(m);
+   {
+#ifdef __cplusplus
+    void* tolua_obj = Mtolua_new((glm::mat4)(tolua_ret));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::mat4");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#else
+    void* tolua_obj = tolua_copy(tolua_S,(void*)&tolua_ret,sizeof(glm::mat4));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::mat4");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#endif
+   }
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'transpose'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* function: glm::inverse */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_inverse00
+static int tolua_glm_glm_inverse00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     (tolua_isvaluenil(tolua_S,1,&tolua_err) || !tolua_isusertype(tolua_S,1,"glm::mat4",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::mat4 m = *((glm::mat4*)  tolua_tousertype(tolua_S,1,0));
+  {
+   glm::mat4 tolua_ret = (glm::mat4)  glm::inverse(m);
+   {
+#ifdef __cplusplus
+    void* tolua_obj = Mtolua_new((glm::mat4)(tolua_ret));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::mat4");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#else
+    void* tolua_obj = tolua_copy(tolua_S,(void*)&tolua_ret,sizeof(glm::mat4));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::mat4");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#endif
+   }
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'inverse'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_glm_open (lua_State* tolua_S)
 {
@@ -540,6 +618,20 @@ TOLUA_API int tolua_glm_open (lua_State* tolua_S)
  tolua_beginmodule(tolua_S,NULL);
   tolua_module(tolua_S,"glm",0);
   tolua_beginmodule(tolua_S,"glm");
+   #ifdef __cplusplus
+   tolua_cclass(tolua_S,"vec3","glm::vec3","",tolua_collect_glm__vec3);
+   #else
+   tolua_cclass(tolua_S,"vec3","glm::vec3","",NULL);
+   #endif
+   tolua_beginmodule(tolua_S,"vec3");
+   tolua_endmodule(tolua_S);
+   #ifdef __cplusplus
+   tolua_cclass(tolua_S,"mat4","glm::mat4","",tolua_collect_glm__mat4);
+   #else
+   tolua_cclass(tolua_S,"mat4","glm::mat4","",NULL);
+   #endif
+   tolua_beginmodule(tolua_S,"mat4");
+   tolua_endmodule(tolua_S);
    tolua_function(tolua_S,"radians",tolua_glm_glm_radians00);
    tolua_function(tolua_S,"radians",tolua_glm_glm_radians01);
    tolua_function(tolua_S,"dot",tolua_glm_glm_dot00);
@@ -552,6 +644,8 @@ TOLUA_API int tolua_glm_open (lua_State* tolua_S)
    tolua_function(tolua_S,"ortho",tolua_glm_glm_ortho01);
    tolua_function(tolua_S,"frustum",tolua_glm_glm_frustum00);
    tolua_function(tolua_S,"lookAt",tolua_glm_glm_lookAt00);
+   tolua_function(tolua_S,"transpose",tolua_glm_glm_transpose00);
+   tolua_function(tolua_S,"inverse",tolua_glm_glm_inverse00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

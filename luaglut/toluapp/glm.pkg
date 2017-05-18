@@ -3,6 +3,26 @@ $#include <glm/gtc/matrix_transform.hpp>
 
 namespace glm
 {
+	class vec3;
+	class mat4;
+
 	float radians(float a);
-	glm::vec3 radians(glm::vec3 a);
+	vec3 radians(vec3 a);
+	
+	float dot(vec3 a, vec3 b);
+	vec3 cross(vec3 a, vec3 b);
+	
+	mat4 rotate(mat4, float radian, vec3 axis);
+	mat4 translate(mat4, vec3 v);
+	mat4 scale(mat4, vec3 v);
+	
+	mat4 perspective(float fov_radian, float aspect, float near, float far);
+	mat4 ortho(float left, float right, float bottom, float top, float near, float far);
+	mat4 ortho(float left, float right, float bottom, float top);
+	mat4 frustum(float left, float right, float bottom, float top, float near, float far);
+	
+	mat4 lookAt(vec3 eye, vec3 target, vec3 up);
+	
+	mat4 transpose(mat4 m);
+	mat4 inverse(mat4 m);
 }

@@ -8,6 +8,12 @@
 #define MYNAME "luaglm"
 #define VERSION "0.5"
 
+void DebugMsg(const char* msg)
+{
+	MessageBoxA(NULL, msg, msg, MB_OK);
+}
+
+
 extern int  tolua_tclass_open(lua_State* tolua_S);
 extern int  tolua_vec3_open(lua_State* tolua_S);
 extern int  tolua_glm_open(lua_State* tolua_S);

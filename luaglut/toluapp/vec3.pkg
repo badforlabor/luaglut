@@ -14,5 +14,13 @@ public:
     vec3(float xf, float yf, float zf);
 	float length();
 	vec3 operator+(vec3 v);
+	vec3 operator-(vec3 v);
+	vec3 operator*(vec3 v);
+	vec3 operator/(vec3 v);
+	
+	vec3 operator+(float v);
+	vec3 operator-(float v);
+	vec3 operator*(float v);
+	vec3 operator/(float v);	
 };
 }

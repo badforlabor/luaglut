@@ -1,0 +1,24 @@
+$#include <glm/glm.hpp>
+$#include <glm/gtc/matrix_transform.hpp>
+
+namespace glm
+{
+class mat4 
+{
+public:
+    mat4(); 
+    mat4(mat4 a);
+		
+	mat4 operator+(mat4 v);
+	mat4 operator-(mat4 v);
+	mat4 operator*(mat4 v);
+	mat4 operator/(mat4 v);
+	
+	mat4 operator+(float v);
+	mat4 operator-(float v);
+	mat4 operator*(float v);
+	mat4 operator/(float v);
+	
+	float get(float i, float j);
+};
+}
