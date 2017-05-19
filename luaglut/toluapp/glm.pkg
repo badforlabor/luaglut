@@ -11,6 +11,7 @@ namespace glm
 	
 	float dot(vec3 a, vec3 b);
 	vec3 cross(vec3 a, vec3 b);
+	vec3 normalize(vec3 m);
 	
 	mat4 rotate(mat4, float radian, vec3 axis);
 	mat4 translate(mat4, vec3 v);
