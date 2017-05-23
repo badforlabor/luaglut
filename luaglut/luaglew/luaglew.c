@@ -12733,32 +12733,45 @@ LUA_API int luaglew_glUniformBlockBinding(lua_State *L) {
 }
 // void glUniformMatrix2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 LUA_API int luaglew_glUniformMatrix2fv(lua_State *L) {
-	glUniformMatrix2fv((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)lua_toboolean(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
+	glUniformMatrix2fv((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)luaL_checkint(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
 	return 0;
 }
 // void glUniformMatrix2fvARB (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 LUA_API int luaglew_glUniformMatrix2fvARB(lua_State *L) {
-	glUniformMatrix2fvARB((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)lua_toboolean(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
+	glUniformMatrix2fvARB((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)luaL_checkint(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
 	return 0;
 }
 // void glUniformMatrix3fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 LUA_API int luaglew_glUniformMatrix3fv(lua_State *L) {
-	glUniformMatrix3fv((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)lua_toboolean(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
+	glUniformMatrix3fv((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)luaL_checkint(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
 	return 0;
 }
 // void glUniformMatrix3fvARB (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 LUA_API int luaglew_glUniformMatrix3fvARB(lua_State *L) {
-	glUniformMatrix3fvARB((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)lua_toboolean(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
+	glUniformMatrix3fvARB((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)luaL_checkint(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
 	return 0;
 }
 // void glUniformMatrix4fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 LUA_API int luaglew_glUniformMatrix4fv(lua_State *L) {
-	glUniformMatrix4fv((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)lua_toboolean(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
+
+	GLfloat *p4 = (GLfloat *)luaglew_checkarray_float(L, 4);
+	GLboolean p3 = (GLboolean)luaL_checkint(L, 3);
+	GLsizei p2 = (GLsizei)luaL_checklong(L, 2);
+	GLint p1 = (GLint)luaL_checkint(L, 1);
+
+	//p3 = GL_FALSE;
+
+	//char buffer[256];
+	//sprintf_s(buffer, 256, "%d,%d,%d. \n[%f,%f,%f,%f]", p1, p2, p3, p4[0], p4[1], p4[2], p4[3]);
+	//printf("%d,%d,%d. \n[%f,%f,%f,%f]\n", p1, p2, p3, p4[0], p4[1], p4[2], p4[3]);
+	// MessageBoxA(NULL, buffer, buffer, MB_OK);
+
+	glUniformMatrix4fv(p1, p2, p3, p4);
 	return 0;
 }
 // void glUniformMatrix4fvARB (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value)
 LUA_API int luaglew_glUniformMatrix4fvARB(lua_State *L) {
-	glUniformMatrix4fvARB((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)lua_toboolean(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
+	glUniformMatrix4fvARB((GLint)luaL_checkint(L, 1), (GLsizei)luaL_checklong(L, 2), (GLboolean)luaL_checkint(L, 3), (GLfloat *)luaglew_checkarray_float(L, 4));
 	return 0;
 }
 // void glUnlockArraysEXT (void)
@@ -13106,7 +13119,7 @@ LUA_API int luaglew_wglFreeMemoryNV(lua_State *L) {
 LUA_API int luaglew_glewInit(lua_State *L) {
 	int return_value = glewInit();
 	lua_pushinteger(L, return_value);
-	return 0;
+	return 1;
 }
 
 
