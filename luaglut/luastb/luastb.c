@@ -34,14 +34,15 @@ LUA_API int Lstbi_load(lua_State *L)
 	// 返回的第一个参数标记成功或者失败
 	lua_pushinteger(L, ret == 0 ? 0 : 1);
 	lua_pushinteger(L, x);
-	lua_pushinteger(L, y + 1);
+	lua_pushinteger(L, y);
 	lua_pushlightuserdata(L, (void*)ret);
+	lua_pushinteger(L, comp);
 
 	//char buffer[128] = { 0 };
 	//sprintf_s(buffer, 128, "%d,%d", x, y);
 	//MessageBoxA(NULL, buffer, buffer, MB_OK);
 
-	return 4;
+	return 5;
 }
 // void stbi_image_free(void *retval_from_stbi_load)
 FUN_vp(stbi_image_free);

@@ -1,0 +1,13 @@
+$#include <glm/glm.hpp>
+$#include <glm/gtc/matrix_transform.hpp>
+$#include "./model.h"
+
+namespace libre
+{
+class Model 
+{
+public:
+    Model(string path); 
+	void Draw(int shader);
+};
+}
