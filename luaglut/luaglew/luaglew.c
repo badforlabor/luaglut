@@ -6767,6 +6767,13 @@ static const LUAGLEW_CONST const_list[] = {
 #ifdef WGL_NV_vertex_array_range
 	{ "WGL_NV_vertex_array_range", WGL_NV_vertex_array_range },
 #endif
+
+	{ "GL_FRAMEBUFFER", GL_FRAMEBUFFER },
+	{ "GL_COLOR_ATTACHMENT0", GL_COLOR_ATTACHMENT0 },
+	{ "GL_RENDERBUFFER", GL_RENDERBUFFER },
+	{ "GL_DEPTH24_STENCIL8", GL_DEPTH24_STENCIL8 },
+	{ "GL_DEPTH_STENCIL_ATTACHMENT", GL_DEPTH_STENCIL_ATTACHMENT },
+
 	{ 0, 0 }
 };
 
@@ -12543,7 +12550,8 @@ LUA_API int luaglew_glTexImage1D(lua_State *L) {
 // void glTexImage2D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
 LUA_API int luaglew_glTexImage2D(lua_State *L) {
 	//glTexImage2D(luaL_checkint(L, 1), (GLint)luaL_checkint(L, 2), luaL_checkint(L, 3), (GLsizei)luaL_checklong(L, 4), (GLsizei)luaL_checklong(L, 5), (GLint)luaL_checkint(L, 6), luaL_checkint(L, 7), luaL_checkint(L, 8), (GLvoid *)luaglew_checkarray_void(L, 9));
-	glTexImage2D(luaL_checkint(L, 1), (GLint)luaL_checkint(L, 2), luaL_checkint(L, 3), (GLsizei)luaL_checklong(L, 4), (GLsizei)luaL_checklong(L, 5), (GLint)luaL_checkint(L, 6), luaL_checkint(L, 7), luaL_checkint(L, 8), (GLvoid *)check_lightuserdata(L, 9));
+	GLvoid* p9 = lua_isnil(L, 9) ? (GLvoid *)NULL : (GLvoid *)check_lightuserdata(L, 9);
+	glTexImage2D(luaL_checkint(L, 1), (GLint)luaL_checkint(L, 2), luaL_checkint(L, 3), (GLsizei)luaL_checklong(L, 4), (GLsizei)luaL_checklong(L, 5), (GLint)luaL_checkint(L, 6), luaL_checkint(L, 7), luaL_checkint(L, 8), p9);
 	return 0;
 }
 // void glTexImage3D (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels)
