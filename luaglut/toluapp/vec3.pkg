@@ -3,6 +3,9 @@ $#include <glm/gtc/matrix_transform.hpp>
 
 namespace glm
 {
+class vec2;
+class vec4;
+
 class vec3 
 {
 public:
@@ -10,7 +13,9 @@ public:
 	float y;
 	float z;
     vec3(); 
+    vec3(float a);
     vec3(vec3 a);
+    vec3(vec4 a);
     vec3(float xf, float yf, float zf);
 	float length();
 	vec3 operator+(vec3 v);
@@ -22,5 +27,49 @@ public:
 	vec3 operator-(float v);
 	vec3 operator*(float v);
 	vec3 operator/(float v);	
+};
+
+class vec2 
+{
+public:
+	float x;
+	float y;
+    vec2(); 
+    vec2(vec2 a);
+    vec2(float xf, float yf);
+	float length();
+	vec2 operator+(vec2 v);
+	vec2 operator-(vec2 v);
+	vec2 operator*(vec2 v);
+	vec2 operator/(vec2 v);
+	
+	vec2 operator+(float v);
+	vec2 operator-(float v);
+	vec2 operator*(float v);
+	vec2 operator/(float v);	
+};
+
+
+class vec4 
+{
+public:
+	float x;
+	float y;
+	float z;
+	float w;
+    vec4(); 
+    vec4(vec4 a);
+    vec4(vec3 a, float wf);
+    vec4(float xf, float yf, float zf, float wf);
+	float length();
+	vec4 operator+(vec4 v);
+	vec4 operator-(vec4 v);
+	vec4 operator*(vec4 v);
+	vec4 operator/(vec4 v);
+	
+	vec4 operator+(float v);
+	vec4 operator-(float v);
+	vec4 operator*(float v);
+	vec4 operator/(float v);	
 };
 }

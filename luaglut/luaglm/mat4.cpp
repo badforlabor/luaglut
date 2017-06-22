@@ -1,6 +1,6 @@
 /*
 ** Lua binding: mat4
-** Generated automatically by tolua++-1.0.92 on 06/01/17 17:08:44.
+** Generated automatically by tolua++-1.0.92 on 06/22/17 14:42:21.
 */
 
 #ifndef __cplusplus
@@ -29,6 +29,13 @@ static int tolua_collect_glm__mat4 (lua_State* tolua_S)
 	return 0;
 }
 
+static int tolua_collect_glm__vec4 (lua_State* tolua_S)
+{
+ glm::vec4* self = (glm::vec4*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
 static int tolua_collect_glm__mat3 (lua_State* tolua_S)
 {
  glm::mat3* self = (glm::mat3*) tolua_tousertype(tolua_S,1,0);
@@ -42,6 +49,7 @@ static int tolua_collect_glm__mat3 (lua_State* tolua_S)
 static void tolua_reg_types (lua_State* tolua_S)
 {
  tolua_usertype(tolua_S,"glm::mat4");
+ tolua_usertype(tolua_S,"glm::vec4");
  tolua_usertype(tolua_S,"glm::mat3");
 }
 
@@ -644,6 +652,45 @@ tolua_lerror:
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: operator* of class  glm::mat4 */
+#ifndef TOLUA_DISABLE_tolua_mat4_glm_mat4__mul02
+static int tolua_mat4_glm_mat4__mul02(lua_State* tolua_S)
+{
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"glm::mat4",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !tolua_isusertype(tolua_S,2,"glm::vec4",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+ {
+  glm::mat4* self = (glm::mat4*)  tolua_tousertype(tolua_S,1,0);
+  glm::vec4 v = *((glm::vec4*)  tolua_tousertype(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'operator*'", NULL);
+#endif
+  {
+   glm::vec4 tolua_ret = *self*(v);
+   {
+#ifdef __cplusplus
+    void* tolua_obj = Mtolua_new((glm::vec4)(tolua_ret));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::vec4");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#else
+    void* tolua_obj = tolua_copy(tolua_S,(void*)&tolua_ret,sizeof(glm::vec4));
+     tolua_pushusertype(tolua_S,tolua_obj,"glm::vec4");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#endif
+   }
+  }
+ }
+ return 1;
+tolua_lerror:
+ return tolua_mat4_glm_mat4__mul01(tolua_S);
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: get of class  glm::mat4 */
 #ifndef TOLUA_DISABLE_tolua_mat4_glm_mat4_get00
 static int tolua_mat4_glm_mat4_get00(lua_State* tolua_S)
@@ -703,6 +750,13 @@ TOLUA_API int tolua_mat4_open (lua_State* tolua_S)
     tolua_function(tolua_S,".call",tolua_mat4_glm_mat3_new01_local);
    tolua_endmodule(tolua_S);
    #ifdef __cplusplus
+   tolua_cclass(tolua_S,"vec4","glm::vec4","",tolua_collect_glm__vec4);
+   #else
+   tolua_cclass(tolua_S,"vec4","glm::vec4","",NULL);
+   #endif
+   tolua_beginmodule(tolua_S,"vec4");
+   tolua_endmodule(tolua_S);
+   #ifdef __cplusplus
    tolua_cclass(tolua_S,"mat4","glm::mat4","",tolua_collect_glm__mat4);
    #else
    tolua_cclass(tolua_S,"mat4","glm::mat4","",NULL);
@@ -725,6 +779,7 @@ TOLUA_API int tolua_mat4_open (lua_State* tolua_S)
     tolua_function(tolua_S,".sub",tolua_mat4_glm_mat4__sub01);
     tolua_function(tolua_S,".mul",tolua_mat4_glm_mat4__mul01);
     tolua_function(tolua_S,".div",tolua_mat4_glm_mat4__div01);
+    tolua_function(tolua_S,".mul",tolua_mat4_glm_mat4__mul02);
     tolua_function(tolua_S,"get",tolua_mat4_glm_mat4_get00);
    tolua_endmodule(tolua_S);
   tolua_endmodule(tolua_S);

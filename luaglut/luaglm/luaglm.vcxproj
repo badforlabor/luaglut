@@ -85,6 +85,8 @@
     <ClInclude Include="tclass.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="array.cpp" />
+    <ClCompile Include="array.h" />
     <ClCompile Include="glm.cpp" />
     <ClCompile Include="maindll.c" />
     <ClCompile Include="mat4.cpp" />

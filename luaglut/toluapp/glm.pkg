@@ -1,5 +1,7 @@
 $#include <glm/glm.hpp>
 $#include <glm/gtc/matrix_transform.hpp>
+$#include <glm/gtc/matrix_transform.hpp>
+$#include "array.h"
 
 namespace glm
 {
@@ -26,4 +28,13 @@ namespace glm
 	
 	mat4 transpose(mat4 m);
 	mat4 inverse(mat4 m);
+	
+	class vec3_array
+	{
+	public:
+		vec3_array();
+		void clear();
+		void push_back(vec3 a);
+		void* data();
+	}
 }

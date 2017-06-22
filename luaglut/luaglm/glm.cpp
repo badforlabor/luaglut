@@ -1,6 +1,6 @@
 /*
 ** Lua binding: glm
-** Generated automatically by tolua++-1.0.92 on 05/19/17 11:02:38.
+** Generated automatically by tolua++-1.0.92 on 06/22/17 16:52:45.
 */
 
 #ifndef __cplusplus
@@ -18,6 +18,8 @@ extern "C"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include "array.h"
 
 /* function to release collected object via destructor */
 #ifdef __cplusplus
@@ -25,6 +27,13 @@ extern "C"
 static int tolua_collect_glm__mat4 (lua_State* tolua_S)
 {
  glm::mat4* self = (glm::mat4*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}
+
+static int tolua_collect_glm__vec3_array (lua_State* tolua_S)
+{
+ glm::vec3_array* self = (glm::vec3_array*) tolua_tousertype(tolua_S,1,0);
 	Mtolua_delete(self);
 	return 0;
 }
@@ -42,6 +51,7 @@ static int tolua_collect_glm__vec3 (lua_State* tolua_S)
 static void tolua_reg_types (lua_State* tolua_S)
 {
  tolua_usertype(tolua_S,"glm::mat4");
+ tolua_usertype(tolua_S,"glm::vec3_array");
  tolua_usertype(tolua_S,"glm::vec3");
 }
 
@@ -648,6 +658,159 @@ static int tolua_glm_glm_inverse00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: new of class  glm::vec3_array */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_vec3_array_new00
+static int tolua_glm_glm_vec3_array_new00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"glm::vec3_array",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   glm::vec3_array* tolua_ret = (glm::vec3_array*)  Mtolua_new((glm::vec3_array)());
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"glm::vec3_array");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: new_local of class  glm::vec3_array */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_vec3_array_new00_local
+static int tolua_glm_glm_vec3_array_new00_local(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"glm::vec3_array",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   glm::vec3_array* tolua_ret = (glm::vec3_array*)  Mtolua_new((glm::vec3_array)());
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"glm::vec3_array");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'new'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: clear of class  glm::vec3_array */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_vec3_array_clear00
+static int tolua_glm_glm_vec3_array_clear00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"glm::vec3_array",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::vec3_array* self = (glm::vec3_array*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'clear'", NULL);
+#endif
+  {
+   self->clear();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'clear'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: push_back of class  glm::vec3_array */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_vec3_array_push_back00
+static int tolua_glm_glm_vec3_array_push_back00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"glm::vec3_array",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !tolua_isusertype(tolua_S,2,"glm::vec3",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::vec3_array* self = (glm::vec3_array*)  tolua_tousertype(tolua_S,1,0);
+  glm::vec3 a = *((glm::vec3*)  tolua_tousertype(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'push_back'", NULL);
+#endif
+  {
+   self->push_back(a);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'push_back'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: data of class  glm::vec3_array */
+#ifndef TOLUA_DISABLE_tolua_glm_glm_vec3_array_data00
+static int tolua_glm_glm_vec3_array_data00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"glm::vec3_array",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  glm::vec3_array* self = (glm::vec3_array*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'data'", NULL);
+#endif
+  {
+   void* tolua_ret = (void*)  self->data();
+   tolua_pushuserdata(tolua_S,(void*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'data'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_glm_open (lua_State* tolua_S)
 {
@@ -686,6 +849,19 @@ TOLUA_API int tolua_glm_open (lua_State* tolua_S)
    tolua_function(tolua_S,"lookAt",tolua_glm_glm_lookAt00);
    tolua_function(tolua_S,"transpose",tolua_glm_glm_transpose00);
    tolua_function(tolua_S,"inverse",tolua_glm_glm_inverse00);
+   #ifdef __cplusplus
+   tolua_cclass(tolua_S,"vec3_array","glm::vec3_array","",tolua_collect_glm__vec3_array);
+   #else
+   tolua_cclass(tolua_S,"vec3_array","glm::vec3_array","",NULL);
+   #endif
+   tolua_beginmodule(tolua_S,"vec3_array");
+    tolua_function(tolua_S,"new",tolua_glm_glm_vec3_array_new00);
+    tolua_function(tolua_S,"new_local",tolua_glm_glm_vec3_array_new00_local);
+    tolua_function(tolua_S,".call",tolua_glm_glm_vec3_array_new00_local);
+    tolua_function(tolua_S,"clear",tolua_glm_glm_vec3_array_clear00);
+    tolua_function(tolua_S,"push_back",tolua_glm_glm_vec3_array_push_back00);
+    tolua_function(tolua_S,"data",tolua_glm_glm_vec3_array_data00);
+   tolua_endmodule(tolua_S);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

@@ -4,6 +4,7 @@ $#include <glm/gtc/matrix_transform.hpp>
 namespace glm
 {
 class mat3;
+class vec4;
 
 class mat4 
 {
@@ -21,6 +22,8 @@ public:
 	mat4 operator-(float v);
 	mat4 operator*(float v);
 	mat4 operator/(float v);
+	
+	vec4 operator*(vec4 v);
 	
 	float get(float i, float j);
 };
